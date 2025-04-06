@@ -24,7 +24,7 @@ final defaultPickupWarehouse = Warehouse(
   warehouseName: 'Unknown Pickup Warehouse',
   warehouseAddress: 'N/A',
   type: 'pickup',
-  coordinates: 'N/A',
+  coordinates: 'N/A', id: 0,
 );
 
 final defaultCompany = Company(

@@ -47,6 +47,48 @@ class DeliveryService {
     throw Exception(
         decodedResponse['message'] ?? 'Failed to load partner details');
   }
+  
+  Future<Map<String, dynamic>> getWarehouseDetails(int warehouseId) async {
+    final response = await http.post(
+      Uri.parse(baseUrl),
+      body: {
+        'action': 'get-warehouse-details',
+        'warehouse-id': warehouseId.toString(),
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load warehouse details');
+    }
+
+    final decodedResponse = json.decode(response.body);
+    if (decodedResponse['success'] == true) {
+      final data = decodedResponse['data'];
+
+      if (data['contact_people'] is String) {
+        data['contact_people'] = json.decode(data['contact_people'] ?? '[]');
+      }
+
+      if (data['photos'] is String && data['photos'] != null) {
+        final photosString = data['photos'] as String;
+        if (photosString.isNotEmpty) {
+          data['photos'] = photosString
+              .split(',')
+              .where((String p) => p.isNotEmpty)
+              .toList();
+        } else {
+          data['photos'] = [];
+        }
+      } else if (data['photos'] == null) {
+        data['photos'] = [];
+      }
+
+      return data;
+    }
+
+    throw Exception(
+        decodedResponse['message'] ?? 'Failed to load warehouse details');
+  }
 
   Future<void> pickupOrder(int orderId, bool isAdmin) async {
     final response = await http.post(
