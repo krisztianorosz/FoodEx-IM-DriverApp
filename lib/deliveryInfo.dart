@@ -2166,6 +2166,33 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                             ),
                                           ),
                                         ),
+                                        const SizedBox(width: 12.0),
+                                        // New contact person button
+                                        GestureDetector(
+                                          onTap: () {
+                                            openContactPerson(context,
+                                                pickupContact.name, pickupContact.telephone);
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 12),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.green.withOpacity(0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: Colors.green,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Icon(
+                                              Icons.person,
+                                              size: isSmallScreen ? 20 : 22,
+                                              color: Colors.green.shade700,
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(
@@ -2376,6 +2403,33 @@ class _DeliveryInfoState extends State<DeliveryInfo> {
                                               Icons.warehouse,
                                               size: isSmallScreen ? 20 : 22,
                                               color: Colors.blue.shade700,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 12.0),
+                                        // New contact person button
+                                        GestureDetector(
+                                          onTap: () {
+                                            openContactPerson(context,
+                                                deliveryContact.name, deliveryContact.telephone);
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16, vertical: 12),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.green.withOpacity(0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: Colors.green,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Icon(
+                                              Icons.person,
+                                              size: isSmallScreen ? 20 : 22,
+                                              color: Colors.green.shade700,
                                             ),
                                           ),
                                         ),
