@@ -21,15 +21,26 @@ class DeliveryService {
     final decodedResponse = json.decode(response.body);
     if (decodedResponse['success'] == true) {
       final data = decodedResponse['data'];
-      
+
       if (data['contact_people'] is String) {
         data['contact_people'] = json.decode(data['contact_people'] ?? '[]');
       }
-    
-      if (data['photos'] is String) {
-        data['photos'] =
-            data['photos'].split(',').where((p) => p.isNotEmpty).toList();
+
+      if (data['photos'] is String && data['photos'] != null) {
+        
+        final photosString = data['photos'] as String;
+        if (photosString.isNotEmpty) {
+          data['photos'] = photosString
+              .split(',')
+              .where((String p) => p.isNotEmpty)
+              .toList();
+        } else {
+          data['photos'] = [];
+        }
+      } else if (data['photos'] == null) {
+        data['photos'] = [];
       }
+
       return data;
     }
 
